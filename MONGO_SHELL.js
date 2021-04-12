@@ -1,7 +1,6 @@
 /**
  * Creating a new collection 
  * from an old one using the same fields
- * 
  */
 
 use('userstatistics');
