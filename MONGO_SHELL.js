@@ -42,3 +42,10 @@ db.informationusers.find().forEach((user) => {
 use('missioncontrol');
 db.addins.remove( { pluginName: 'IEK - '}
 );
+
+/**
+ * Remove values ​​a less than b
+ */
+ use('userstatistics');
+ db.test.remove( { $where : "this.commonTime < this.idlingTime" }
+ );
