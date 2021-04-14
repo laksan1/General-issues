@@ -5,7 +5,7 @@
 
 use('userstatistics');
 db.informationusers.find().forEach((user) => {
-    let sessions =[];
+    let sessions = [];
     departament = user.departament;
     userAdName = user.userAdName;
     userRevitName = user.userRevitName;
@@ -40,12 +40,36 @@ db.informationusers.find().forEach((user) => {
  * Removing from collection documents by value of field
  */
 use('missioncontrol');
-db.addins.remove( { pluginName: 'IEK - '}
+db.addins.remove({ pluginName: 'IEK - ' }
 );
 
 /**
  * Remove values ​​a less than b
  */
- use('userstatistics');
- db.test.remove( { $where : "this.commonTime < this.idlingTime" }
- );
+use('userstatistics');
+db.test.remove({ $where: "this.commonTime < this.idlingTime" }
+);
+
+
+
+/**
+* Update not good IDLING
+*/
+use('userstatistics');
+db.test.update(
+    { $where: "this.commonTime < this.idlingTime" },
+    {
+        $set: {
+            idlingTime:
+            {
+                $subtract:
+                    ["$commonTime",
+                        {
+                            $divide: ["$commonTime", 3]
+                        }
+                    ]
+            }
+        }
+    },
+    { multi: true }
+);
