@@ -73,3 +73,26 @@ db.test.update(
     },
     { multi: true }
 );
+
+/**
+ * 
+ * Insert new collection from JSON
+ */
+use('userstatistics');
+ db.test.insertMany([
+  {
+    "name_button_event": "ButtonEventTemplate",
+    "is_pressed_button_event": false,
+    "condition_button_event": false
+  },
+  {
+    "name_button_event": "ButtonParamAutoWriteRefresh",
+    "is_pressed_button_event": false,
+    "condition_button_event": false
+  },
+  {
+    "name_button_event": "ButtonMepSystemAutorefresh",
+    "is_pressed_button_event": false,
+    "condition_button_event": false
+  }
+]);
