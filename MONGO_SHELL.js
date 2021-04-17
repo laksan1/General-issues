@@ -79,20 +79,45 @@ db.test.update(
  * Insert new collection from JSON
  */
 use('userstatistics');
- db.test.insertMany([
-  {
-    "name_button_event": "ButtonEventTemplate",
-    "is_pressed_button_event": false,
-    "condition_button_event": false
-  },
-  {
-    "name_button_event": "ButtonParamAutoWriteRefresh",
-    "is_pressed_button_event": false,
-    "condition_button_event": false
-  },
-  {
-    "name_button_event": "ButtonMepSystemAutorefresh",
-    "is_pressed_button_event": false,
-    "condition_button_event": false
-  }
+db.test.insertMany([
+    {
+        "name_button_event": "ButtonEventTemplate",
+        "is_pressed_button_event": false,
+        "condition_button_event": false
+    },
+    {
+        "name_button_event": "ButtonParamAutoWriteRefresh",
+        "is_pressed_button_event": false,
+        "condition_button_event": false
+    },
+    {
+        "name_button_event": "ButtonMepSystemAutorefresh",
+        "is_pressed_button_event": false,
+        "condition_button_event": false
+    }
 ]);
+
+/**
+ * 
+ * Return elements witch createdElements SIZE = 3
+ */
+use('userstatistics');
+db.test.aggregate([
+    { match: { createdElements: { $size: 3 } } }
+])
+
+
+/**
+ * 
+ * Group by sub field
+ */
+
+db.test.aggregate([
+
+    {
+        $group: {
+            _id: { x: "$x.mdoels.centralPath" },
+            y: { $first: "$y" }
+        }
+    }
+])
