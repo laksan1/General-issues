@@ -3,6 +3,8 @@
  * from an old one using the same fields
  */
 
+const { collection } = require("../WEB_NIka/UserStatistics/models/Sessions");
+
 use('userstatistics');
 db.informationusers.find().forEach((user) => {
     let sessions = [];
@@ -111,7 +113,7 @@ db.test.aggregate([
  * 
  * Group by sub field
  */
-
+use('userstatistics');
 db.test.aggregate([
 
     {
@@ -121,3 +123,23 @@ db.test.aggregate([
         }
     }
 ])
+
+/**
+ *
+ * Replace collection from Desktop
+ * Possible Exeption: key $oid must not start with '$'
+ */
+
+use('userstatistics');
+// const path = 'C:\\Users\\a.a.laktionov\\Desktop\\Debugger.json';
+const path = 'C:\\Users\\a.a.laktionov\\Desktop\\sessions.json';
+const file = require(path);
+db.session.remove({});
+db.newCollection.insertMany(file);
+
+/**
+ * Import Collection
+ *
+ */
+// mongoimport --jsonArray --db userstatistics -collection newcollection3 --file C:\\Users\\a.a.laktionov\\Desktop\\sessions.json
+
