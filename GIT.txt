@@ -1,3 +1,4 @@
 git add .
 git init - инициализация git
 git commit -a -m"add file"
+git checkout developer - переключить ветку
