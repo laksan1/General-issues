@@ -59,3 +59,19 @@ const cleanTimeSessions = await Sessions.aggregate([
         }
     }
 ]);
+
+/**
+ * Create a new file and read
+ */
+const fs = require('fs');
+const path = 'C:\\Users\\a.a.laktionov\\Desktop\\TEST.txt';
+
+fs.writeFile(`${path}`, 'BIM TEAM!', function (err) {
+    if (err) throw new Error(err);
+    fs.rename
+    fs.readFile(path, { encoding: 'utf-8' }, function (err, data) {
+        if (err) throw new Error(err);
+        console.log(data);
+    })
+});
+console.log(1);
