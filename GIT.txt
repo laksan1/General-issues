@@ -2,3 +2,7 @@ git add .
 git init - инициализация git
 git commit -a -m"add file"
 git checkout developer - переключить ветку
+git branch -v  все ветки проекта
+git checkout -b -создать вектку и переключиться на нее
+git log
+git log --pretty=format:"%h - %an, %ar : %s"

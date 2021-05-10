@@ -141,5 +141,9 @@ db.newCollection.insertMany(file);
  * Import Collection
  *
  */
-// mongoimport --jsonArray --db userstatistics -collection newcollection3 --file C:\\Users\\a.a.laktionov\\Desktop\\sessions.json
+// mongoimport -d userstatistics
 
+/**
+ * Filter by date gte and lte
+ */
+{ DateAdded: { $gt: ISODate('2019-09-18T21:07:42.313+00:00'), $lt: ISODate('2019-09-20T21:08:42.313+00:00') } }
