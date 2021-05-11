@@ -53,10 +53,10 @@ db.test.remove({ $where: "this.commonTime < this.idlingTime" }
 
 
 /**
-* Update not good IDLING
+* Update not good IDLING, Not working
 */
 use('userstatistics');
-db.test.update(
+db.sessions.update(
     { $where: "this.commonTime < this.idlingTime" },
     {
         $set: {
@@ -163,12 +163,26 @@ db.sessions.aggregate([
  */
 use('userstatistics');
 db.sessions.aggregate([
-    { $project: { 'userAdName': 1,'startTime': 1, 'idlingTime': 1, 'commonTime': 1 } },
+    { $project: { 'userAdName': 1, 'startTime': 1, 'idlingTime': 1, 'commonTime': 1 } },
     {
         $addFields: {
             differenceTime: { $subtract: ["$commonTime", "$idlingTime"] },
         }
     },
-    { $sort: {'differenceTime': -1 }},
+    { $sort: { 'differenceTime': -1 } },
     { $limit: 15 }
 ], { allowDiskUse: true })
+
+/**
+ * Remove documents by conditions TODO
+ */
+use('userstatistics');
+db.sessions.remove([
+    {
+        $addFields: {
+            differenceTime: { $subtract: ["$commonTime", "$idlingTime"] },
+        }
+    },
+    { differenceTime: { $gte: 500 } },
+    true
+]);
