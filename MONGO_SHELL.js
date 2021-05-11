@@ -3,8 +3,6 @@
  * from an old one using the same fields
  */
 
-const { collection } = require("../WEB_NIka/UserStatistics/models/Sessions");
-
 use('userstatistics');
 db.informationusers.find().forEach((user) => {
     let sessions = [];
@@ -147,3 +145,30 @@ db.newCollection.insertMany(file);
  * Filter by date gte and lte
  */
 { DateAdded: { $gt: ISODate('2019-09-18T21:07:42.313+00:00'), $lt: ISODate('2019-09-20T21:08:42.313+00:00') } }
+{ warningsUser: { $gt: ISODate('2019-09-18T21:07:42.313+00:00'), $lt: ISODate('2019-09-20T21:08:42.313+00:00') } }
+
+/**
+ * Sort By field
+ */
+use('userstatistics');
+db.sessions.aggregate([
+    { $project: { 'userAdName': 1, 'idlingTime': 1 } },
+    { $sort: { 'idlingTime': -1 } },
+    { $limit: 15 }
+], { allowDiskUse: true })
+
+
+/**
+ * Different between idlingTime and commonTime
+ */
+use('userstatistics');
+db.sessions.aggregate([
+    { $project: { 'userAdName': 1,'startTime': 1, 'idlingTime': 1, 'commonTime': 1 } },
+    {
+        $addFields: {
+            differenceTime: { $subtract: ["$commonTime", "$idlingTime"] },
+        }
+    },
+    { $sort: {'differenceTime': -1 }},
+    { $limit: 15 }
+], { allowDiskUse: true })
