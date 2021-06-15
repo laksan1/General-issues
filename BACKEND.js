@@ -74,4 +74,23 @@ fs.writeFile(`${path}`, 'BIM TEAM!', function (err) {
         console.log(data);
     })
 });
-console.log(1);
+
+/**
+ * Add element to array
+ */
+
+await FamilyTaskManagers.updateOne(
+    { cloudFile: match.cloudFile },
+    { $push: { managers: newManager } }
+);
+
+/**
+ * Remove element from array
+ */
+
+ await FamilyTaskManagers.updateOne(
+    { cloudFile: manager.cloudFile.centralPath },
+    { $pull: { managers: { _id: manager.name._id } } }
+  );
+
+
