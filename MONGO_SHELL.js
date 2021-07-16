@@ -186,3 +186,11 @@ db.sessions.remove([
     { differenceTime: { $gte: 500 } },
     true
 ]);
+
+// Copy collection
+use('userstatistics');
+db.settings.find().forEach(
+    function (x) {
+        db.test.insert(x)
+    }
+);
