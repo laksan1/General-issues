@@ -194,3 +194,16 @@ db.settings.find().forEach(
         db.test.insert(x)
     }
 );
+
+/// Remove elements by own conditions
+use('userstatistics');
+db.sessions.find( { $where: function() {
+  if (this.commonTime - this.idlingTime > 400)
+    return this.commonTime
+ }}).count()
+
+ use('userstatistics');
+ db.sessions.remove( { $where: function() {
+  if (this.commonTime - this.idlingTime > 400)
+    return this.commonTime
+  } } );
