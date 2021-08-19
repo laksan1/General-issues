@@ -3,6 +3,8 @@
  * from an old one using the same fields
  */
 
+const { includes } = require("lodash");
+
 use('userstatistics');
 db.informationusers.find().forEach((user) => {
     let sessions = [];
@@ -197,13 +199,32 @@ db.settings.find().forEach(
 
 /// Remove elements by own conditions
 use('userstatistics');
-db.sessions.find( { $where: function() {
-  if (this.commonTime - this.idlingTime > 400)
-    return this.commonTime
- }}).count()
+db.sessions.find({
+    $where: function () {
+        if (this.commonTime - this.idlingTime > 400)
+            return this.commonTime
+    }
+}).count()
 
- use('userstatistics');
- db.sessions.remove( { $where: function() {
-  if (this.commonTime - this.idlingTime > 400)
-    return this.commonTime
-  } } );
+use('userstatistics');
+db.sessions.remove({
+    $where: function () {
+        if (this.commonTime - this.idlingTime > 400)
+            return this.commonTime
+    }
+});
+
+/**
+ * Add new fied (test1 for test)
+ */
+use('userstatistics');
+db.test.find().forEach(
+    function (x) {
+        value = x.a;
+        if(value.includes('/')){
+            newValue = value.split('/')[1]; 
+            x.projectId = newValue;
+        }
+        db.test1.insertOne(x)
+    }
+);
