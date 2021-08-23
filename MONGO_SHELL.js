@@ -228,3 +228,7 @@ db.test.find().forEach(
         db.test1.insertOne(x)
     }
 );
+
+
+// TODO to know how right
+mongoimport --db userstatistics --collection test --file C:\Users\a.a.laktionov\Desktop\test.json
