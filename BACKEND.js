@@ -88,9 +88,14 @@ await FamilyTaskManagers.updateOne(
  * Remove element from array
  */
 
- await FamilyTaskManagers.updateOne(
+await FamilyTaskManagers.updateOne(
     { cloudFile: manager.cloudFile.centralPath },
     { $pull: { managers: { _id: manager.name._id } } }
-  );
+);
+
+/**
+ * Search by Regex
+ */
+const sessionMatch = await Sessions.findOne({ 'centralPath': new RegExp(modelName, 'gi') });
 
 
