@@ -96,6 +96,11 @@ await FamilyTaskManagers.updateOne(
 /**
  * Search by Regex
  */
-const sessionMatch = await Sessions.findOne({ 'centralPath': new RegExp(modelName, 'gi') });
+const sessionMatch = await Sessions.findOne({ 'centralPath': new RegExp(modelName, 'gi') }); // 1 способ
+
+const test = await Sessions.aggregate([{ $project: { 'centralPath': 1}}]); // 2 способ (плохой)
+const centralPath = test.find(x => x.centralPath.includes(modelName))?.centralPath; //TODO REGEX
+
+const sessionMatch = await Sessions.findOne({$text:{$search: modelName}}); // 3 способ, работает только с индексом
 
 
