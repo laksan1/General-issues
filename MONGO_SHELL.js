@@ -197,6 +197,7 @@ db.settings.find().forEach(
     }
 );
 
+
 /// Remove elements by own conditions
 use('userstatistics');
 db.sessions.find({
@@ -221,8 +222,8 @@ use('userstatistics');
 db.test.find().forEach(
     function (x) {
         value = x.a;
-        if(value.includes('/')){
-            newValue = value.split('/')[1]; 
+        if (value.includes('/')) {
+            newValue = value.split('/')[1];
             x.projectId = newValue;
         }
         db.test1.insertOne(x)
@@ -231,4 +232,17 @@ db.test.find().forEach(
 
 
 // TODO to know how right
-mongoimport --db userstatistics --collection test --file C:\Users\a.a.laktionov\Desktop\test.json
+mongoimport--db userstatistics--collection test--file C: \Users\a.a.laktionov\Desktop\test.json
+
+/**
+ * insert sessions for the last 1 months
+ */
+use('userstatistics');
+start = ISODate('2021-08-18T21:07:42.313+00:00')
+db.sessions.find().forEach(
+    function (x) {
+        if (x.startTime > start) {
+            db.test.insert(x)
+        }
+    }
+);
