@@ -1,9 +1,7 @@
 /**
  * Creating a new collection 
  * from an old one using the same fields
- */
-
-const { includes } = require("lodash");
+ **/
 
 use('userstatistics');
 db.informationusers.find().forEach((user) => {
@@ -36,11 +34,9 @@ db.informationusers.find().forEach((user) => {
     db.sessions.insertMany(sessions);
 });
 
-
-
 /**
  * Removing from collection documents by value of field
- */
+ **/
 use('missioncontrol');
 db.addins.remove({ pluginName: 'IEK - ' }
 );
@@ -52,11 +48,9 @@ use('userstatistics');
 db.test.remove({ $where: "this.commonTime < this.idlingTime" }
 );
 
-
-
 /**
 * Update not good IDLING, Not working
-*/
+**/
 use('userstatistics');
 db.sessions.update(
     { $where: "this.commonTime < this.idlingTime" },
@@ -77,9 +71,8 @@ db.sessions.update(
 );
 
 /**
- * 
  * Insert new collection from JSON
- */
+ **/
 use('userstatistics');
 db.test.insertMany([
     {
@@ -102,7 +95,7 @@ db.test.insertMany([
 /**
  * 
  * Return elements witch createdElements SIZE = 3
- */
+ **/
 use('userstatistics');
 db.test.aggregate([
     { match: { createdElements: { $size: 3 } } }
@@ -112,7 +105,7 @@ db.test.aggregate([
 /**
  * 
  * Group by sub field
- */
+ **/
 use('userstatistics');
 db.test.aggregate([
 
@@ -125,10 +118,9 @@ db.test.aggregate([
 ])
 
 /**
- *
  * Replace collection from Desktop
  * Possible Exeption: key $oid must not start with '$'
- */
+ **/
 
 use('userstatistics');
 // const path = 'C:\\Users\\a.a.laktionov\\Desktop\\Debugger.json';
@@ -138,20 +130,14 @@ db.session.remove({});
 db.newCollection.insertMany(file);
 
 /**
- * Import Collection
- *
- */
-// mongoimport -d userstatistics
-
-/**
  * Filter by date gte and lte
- */
+ **/
 { DateAdded: { $gt: ISODate('2019-09-18T21:07:42.313+00:00'), $lt: ISODate('2019-09-20T21:08:42.313+00:00') } }
 { warningsUser: { $gt: ISODate('2019-09-18T21:07:42.313+00:00'), $lt: ISODate('2019-09-20T21:08:42.313+00:00') } }
 
 /**
  * Sort By field
- */
+ **/
 use('userstatistics');
 db.sessions.aggregate([
     { $project: { 'userAdName': 1, 'idlingTime': 1 } },
@@ -159,10 +145,9 @@ db.sessions.aggregate([
     { $limit: 15 }
 ], { allowDiskUse: true })
 
-
 /**
  * Different between idlingTime and commonTime
- */
+ **/
 use('userstatistics');
 db.sessions.aggregate([
     { $project: { 'userAdName': 1, 'startTime': 1, 'idlingTime': 1, 'commonTime': 1 } },
@@ -177,7 +162,7 @@ db.sessions.aggregate([
 
 /**
  * Remove documents by conditions TODO
- */
+ **/
 use('userstatistics');
 db.sessions.remove([
     {
@@ -189,7 +174,9 @@ db.sessions.remove([
     true
 ]);
 
-// Copy collection
+/**
+ * Copy collection
+ **/
 use('userstatistics');
 db.settings.find().forEach(
     function (x) {
@@ -197,8 +184,9 @@ db.settings.find().forEach(
     }
 );
 
-
-/// Remove elements by own conditions
+/**
+ *  Find elements by own conditions
+ **/
 use('userstatistics');
 db.sessions.find({
     $where: function () {
@@ -207,6 +195,9 @@ db.sessions.find({
     }
 }).count()
 
+/**
+ *  Remove elements by own conditions
+ **/
 use('userstatistics');
 db.sessions.remove({
     $where: function () {
@@ -216,8 +207,8 @@ db.sessions.remove({
 });
 
 /**
- * Add new fied (test1 for test)
- */
+ * Add new fied
+ **/
 use('userstatistics');
 db.test.find().forEach(
     function (x) {
@@ -230,12 +221,13 @@ db.test.find().forEach(
     }
 );
 
-
-// TODO to know how right
+/**
+ * Import collection (Not working)
+ **/
 mongoimport--db userstatistics--collection test--file C: \Users\a.a.laktionov\Desktop\test.json
 
 /**
- * insert sessions for the last 1 months
+ * Insert sessions for the last 1 months
  */
 use('userstatistics');
 start = ISODate('2021-08-18T21:07:42.313+00:00')
