@@ -1,0 +1,40 @@
+// Reference https://blog.listratenkov.com/webstorm-ide-hot-keys/
+
+Commit tool window = Alt+0
+
+Commit = Ctrl+K
+
+Commit and Push = Ctrl+Alt+K
+
+Push = Ctrl+Shift+K
+
+Search Everywhere = Double Shift 
+
+Description method = Ctrl + q
+
+Prettier = Ctrl + Alt + L
+
+Refactor = Ctrl+Alt+Shift+T
+
+Move string up = ⌥ ⇧ ↑ Alt + Shift + Up
+
+Move string down = ⌥ ⇧ ↓	Alt + Shift + Down
+
+Duplicate string = Ctrl + D
+
+Intelligent string splicing(only for HTML and JavaScript) = Ctrl + Shift + J
+
+Select code to the end block = Ctrl + Shift + ]
+
+Select code to the start block  = Ctrl + Shift + [
+
+Delete to the end word = Ctrl + Delete	
+
+Pass to the file = Ctrl + Shift + N
+
+Go to ad = Ctrl + B или Ctrl + Click	
+
+Replace word = Ctrl + R
+
+Refactor rename = Shift + F6
+
