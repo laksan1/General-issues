@@ -238,3 +238,23 @@ db.sessions.find().forEach(
         }
     }
 );
+
+
+/**
+ * Insert sessions for the last 1 months
+ */
+use('userstatistics');
+db.sessions.find().forEach(
+    function (x) {
+        // if (x.revitVersion === null) {
+        //     x.revitVersion = '2020'
+        // }
+
+          if (x.revitVersion === '') {
+            x.revitVersion = '2020'
+        }
+
+        console.log('VERSION', x.revitVersion);
+    }
+);
+

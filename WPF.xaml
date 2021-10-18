@@ -1,0 +1,52 @@
+<Image Grid.Column="3" Grid.Row="3" Grid.RowSpan="4" Name="funkyArrow" Source="pack://application:,,,/CuttingHoles;component/Resources/Cut.png">
+	<Image.Triggers>
+		<EventTrigger RoutedEvent="Image.Loaded">
+			<BeginStoryboard>
+				<Storyboard>
+					<DoubleAnimation Storyboard.TargetName="funkyArrow" Storyboard.TargetProperty="Opacity" From="1.0" To="0.1" Duration="0:0:0:5" AutoReverse="True" RepeatBehavior="Forever"/>
+				</Storyboard>
+			</BeginStoryboard>
+		</EventTrigger>
+	</Image.Triggers>
+</Image>
+
+<Button Grid.Row="8" Grid.Column="1" FontSize="18" Style="{StaticResource ButtonPulse}" Content="{Binding UpdateButtonTitle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Command="{Binding CommandButtonUpdateSetting}"/>
+<!--Стиль кнопок Blue с автоматическим изменением размером и цвета при наведении-->
+<Style x:Key="ButtonPulse" TargetType="{x:Type Button}">
+	<Setter Property="HorizontalContentAlignment" Value="Center"/>
+	<Setter Property="VerticalContentAlignment" Value="Center"/>
+	<Setter Property="Padding" Value="1"/>
+	<Setter Property="Template">
+		<Setter.Value>
+			<ControlTemplate TargetType="{x:Type Button}">
+				<Grid x:Name="grid">
+					<Border x:Name="border" CornerRadius="2" BorderBrush="#FF529B" BorderThickness="2" Background="#eee">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextElement.Foreground="#002951" TextElement.FontWeight="Bold"></ContentPresenter>
+					</Border>
+				</Grid>
+				<ControlTemplate.Triggers>
+					<EventTrigger RoutedEvent="Button.MouseEnter">
+						<BeginStoryboard>
+							<Storyboard>
+								<ColorAnimation Storyboard.TargetName="border" AutoReverse="True" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#FF529B" RepeatBehavior="Forever" Duration="0:0:1"/>
+
+							</Storyboard>
+						</BeginStoryboard>
+					</EventTrigger>
+					<Trigger Property="IsPressed" Value="True">
+						<Setter Property="Background" TargetName="border" Value="#70798c"/>
+						<Setter Property="Foreground" Value="LawnGreen"/>
+					</Trigger>
+					<!--<Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" TargetName="border" Value="Gray"/>
+                                </Trigger>-->
+					<Trigger Property="IsEnabled" Value="False">
+						<Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+					</Trigger>
+
+				</ControlTemplate.Triggers>
+			</ControlTemplate>
+		</Setter.Value>
+	</Setter>
+</Style>
+

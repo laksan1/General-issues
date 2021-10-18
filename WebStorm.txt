@@ -12,7 +12,7 @@ Search Everywhere = Double Shift
 
 Description method = Ctrl + q
 
-Prettier = Ctrl + Alt + L
+Prettier = Ctrl + Alt + L // Ctrl + Alt + Enter 
 
 Refactor = Ctrl+Alt+Shift+T
 
@@ -37,4 +37,8 @@ Go to ad = Ctrl + B или Ctrl + Click
 Replace word = Ctrl + R
 
 Refactor rename = Shift + F6
+
+Split and Move Right = Ctrl + ALt \
+
+
 
