@@ -15,9 +15,11 @@ public static T Deserialize<T>(string json) where T : new()
 	}
 }
 
-// Creation DirectShape
-DirectShape new_shape_element = DirectShape.CreateElement(linkDocumentMEP, new ElementId((int)BuiltInCategoryCableTrays));
-new_shape_element.SetShape(new List<GeometryObject>() { intersectSolid });
+// TEST Direct Shape BB
+DirectShape new_shape_element = DirectShape.CreateElement(_document, new ElementId((int)BuiltInCategory.OST_CableTray));
+Solid mepBbSolid = GetSolidFromBouindigBox(el.get_BoundingBox(null));
+//  Solid mepBbSolidTransformed = SolidUtils.CreateTransformed(mepBbSolid, bb.Transform);
+new_shape_element.SetShape(new List<GeometryObject>() { mepBbSolid });
 new_shape_element.SetName("TEST");
 
 static Solid GetSolidFromBouindigBox(BoundingBoxXYZ _boundingBoxXYZ)

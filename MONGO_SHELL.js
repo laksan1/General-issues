@@ -246,11 +246,7 @@ db.sessions.find().forEach(
 use('userstatistics');
 db.sessions.find().forEach(
     function (x) {
-        // if (x.revitVersion === null) {
-        //     x.revitVersion = '2020'
-        // }
-
-          if (x.revitVersion === '') {
+        if (x.revitVersion === '') {
             x.revitVersion = '2020'
         }
 
@@ -258,3 +254,8 @@ db.sessions.find().forEach(
     }
 );
 
+/**
+ * Update all fields of collection by condition
+ */
+use('userstatistics');
+db.sessions.updateMany({ isAnotherDepartment: true }, { $set: { isAnotherDepartment: false } })
