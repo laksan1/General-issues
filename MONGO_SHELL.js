@@ -230,11 +230,11 @@ mongoimport--db userstatistics--collection test--file C: \Users\a.a.laktionov\De
  * Insert sessions for the last 1 months
  */
 use('userstatistics');
-start = ISODate('2021-08-18T21:07:42.313+00:00')
-db.sessions.find().forEach(
+start = ISODate('2021-11-16T21:00:00.000Z')
+db.nikatimes.find().forEach(
     function (x) {
-        if (x.startTime > start) {
-            db.test.insert(x)
+        if (x.startTime > start && x.userAdName === 'Котельников Сергей') {
+            db.serg.insert(x)
         }
     }
 );
@@ -258,4 +258,33 @@ db.sessions.find().forEach(
  * Update all fields of collection by condition
  */
 use('userstatistics');
+db.sessions.updateMany({ revitVersion: '' }, { $set: { revitVersion: '2020' } })
+
+use('userstatistics');
+db.sessions.updateMany({ departament: 'Отдел систем  отопления и вентиляции' }, { $set: { departament: 'Отдел систем отопления и вентиляции' } })
+
+
+use('userstatistics');
 db.sessions.updateMany({ isAnotherDepartment: true }, { $set: { isAnotherDepartment: false } })
+
+
+/**
+ * Added  field 'city' of collection by condition
+ */
+
+use('userstatistics');
+db.characteristicsusers.updateMany({ $or: [{ city: null }, { city: { $exists: false } }, { city: '' }] }, { $set: { city: "Москва" } })
+
+
+/**
+ * Added  field 'revitVersion' of collection by condition
+ */
+use('userstatistics');
+db.sessions.updateMany({ $or: [{ revitVersion: null }, { revitVersion: { $exists: false } }, { revitVersion: '' }] }, { $set: { revitVersion: "2020" } })
+
+
+/**
+ * Added  field 'departament' of collection by condition
+ */
+ use('userstatistics');
+ db.sessions.updateMany({ $or: [{ revitVersion: null }, { revitVersion: { $exists: false } }, { revitVersion: '' }] }, { $set: { revitVersion: "2020" } })
