@@ -288,3 +288,11 @@ db.sessions.updateMany({ $or: [{ revitVersion: null }, { revitVersion: { $exists
  */
  use('userstatistics');
  db.sessions.updateMany({ $or: [{ revitVersion: null }, { revitVersion: { $exists: false } }, { revitVersion: '' }] }, { $set: { revitVersion: "2020" } })
+
+/**
+ * 
+ * Group by field to compass
+ */
+ {
+    _id: {city: '$city'}
+ }
