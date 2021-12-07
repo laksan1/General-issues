@@ -163,3 +163,28 @@ const result = await productModel.aggregate([
  * Get Amount group (await + length)
  */
 departamentAmount: (await Sessions.aggregate().group({ _id: { departament: "$departament" } })).length
+
+
+/*
+ * Hard Calculation of mongo
+ */
+aggreagation
+    .group({
+        _id: { userAdName: "$userAdName" },
+        commonTime: { $sum: "$commonTime" },
+    })
+    .project({
+        userAdName: '$_id.userAdName',
+        commonTime: '$commonTime',
+        workingTimePercentage: {
+            $round:
+                [{
+                    $divide:
+                        [{
+                            $multiply:
+                                ['$commonTime', percentage]
+                        }, { $multiply: [8 * +lastDay, minutes] }]
+                }, 0]
+        }
+    })
+    .sort({ userAdName: 1 });
