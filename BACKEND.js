@@ -114,45 +114,52 @@ const test = TopLevelCategory.aggregate()
     })
     .exec();
 
-    /**
-     * Function lookup, addFields, $function and returning a typed result 
-     */
-    const result = await productModel.aggregate([
-			{
-				$match: {
-					categories: dto.category
-				}
-			},
-			{
-				$sort: {
-					_id: 1
-				}
-			},
-			{
-				$limit: dto.limit
-			},
-			{
-				$lookup: {
-					from: 'Review',
-					localField: '_id',
-					foreignField: 'productId',
-					as: 'reviews'
-				}
-			},
-			{
-				$addFields: {
-					reviewCount: { $size: '$reviews' },
-					reviewAvg: { $avg: '$reviews.rating' },
-					// reviews:{
-					// 	$function: {
-					// 		body:  `function(reviews) {
-					// 			reviews.sort((a, b) => new Date(b.createdAt ) - new Date(b.createdAt ))
-					// 			return reviews
-					// 		}`,
-					// 		args: ['reviews'],
-					// 		lang: 'js'
-					// 	}
-					// }
-				}
-			}
-		]).exec() as (ProductModel & { review: ReviewModel[], reviewCount: number, reviewAvg: number })[];
+/**
+ * Function lookup, addFields, $function and returning a typed result 
+ */
+const result = await productModel.aggregate([
+    {
+        $match: {
+            categories: dto.category
+        }
+    },
+    {
+        $sort: {
+            _id: 1
+        }
+    },
+    {
+        $limit: dto.limit
+    },
+    {
+        $lookup: {
+            from: 'Review',
+            localField: '_id',
+            foreignField: 'productId',
+            as: 'reviews'
+        }
+    },
+    {
+        $addFields: {
+            reviewCount: { $size: '$reviews' },
+            reviewAvg: { $avg: '$reviews.rating' },
+            // reviews:{
+            // 	$function: {
+            // 		body:  `function(reviews) {
+            // 			reviews.sort((a, b) => new Date(b.createdAt ) - new Date(b.createdAt ))
+            // 			return reviews
+            // 		}`,
+            // 		args: ['reviews'],
+            // 		lang: 'js'
+            // 	}
+            // }
+        }
+    }
+]).exec() as (ProductModel & { review: ReviewModel[], reviewCount: number, reviewAvg: number })[];
+
+
+
+/**
+ * Get Amount group (await + length)
+ */
+departamentAmount: (await Sessions.aggregate().group({ _id: { departament: "$departament" } })).length
