@@ -215,3 +215,17 @@ db.characters.bulkWrite([
 * Added expr()
 */
 db.sessions.find({$expr:  {$eq: ['$userAdName', 'Лактионов Александр']}})
+
+db.sessions.find( { $expr: { $gt: [ "$commonTime" , "$idlingTime" ] } } )
+
+/*
+* Added unwind (devide fild as array by item)
+*/
+// EXAMPLES --------------------------------
+db.inventory.insertOne({ "_id" : 1, "item" : "ABC1", sizes: [ "S", "M", "L"] })
+db.inventory.aggregate( [ { $unwind : "$sizes" } ] )
+// RESULT --------------------------------
+{ "_id" : 1, "item" : "ABC1", "sizes" : "S" }
+{ "_id" : 1, "item" : "ABC1", "sizes" : "M" }
+{ "_id" : 1, "item" : "ABC1", "sizes" : "L" }
+
