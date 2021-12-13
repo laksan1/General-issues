@@ -284,15 +284,42 @@ db.sessions.updateMany({ $or: [{ revitVersion: null }, { revitVersion: { $exists
 
 
 /**
- * Added  field 'departament' of collection by condition
+* Added  field 'idlingTime' of collection by condition
+*/
+use('userstatistics');
+db.nikatimes.updateMany({ $or: [{ idlingTime: null }, { idlingTime: { $exists: false } }] }, { $set: { idlingTime: 0 } })
+
+
+
+/**
+*  Added  field 'projectName' of collection by condition
+*/
+use('userstatistics');
+db.sessions.updateMany({ $or: [{ projectName: null }, { projectName: { $exists: false } }] }, { $set: { projectName: '' } })
+
+
+/**
+ * Insert  field 'projectId' of collection by condition
  */
- use('userstatistics');
- db.sessions.updateMany({ $or: [{ revitVersion: null }, { revitVersion: { $exists: false } }, { revitVersion: '' }] }, { $set: { revitVersion: "2020" } })
+
+use('userstatistics');
+db.sessions.find().forEach(
+    function (s) {
+        if (s.projectId === '' && s.projectName === '' && !s.centralPath.toLowerCase().endsWith('.rfa') && s.centralPath.toLowerCase().startsWith('rsn')) {
+            fullProjectId = s.centralPath.split("/")[3];
+            if (fullProjectId?.length > 8) {
+                console.log('fullProjectId', fullProjectId);
+                s.projectId = fullProjectId.substr(0, 7) ?? '';
+            }
+            //s.projectName = s.centralPath.split("/")[3] ?? '';
+        }
+    }
+);
 
 /**
  * 
  * Group by field to compass
  */
- {
-    _id: {city: '$city'}
- }
+{
+    _id: { city: '$city' }
+}
