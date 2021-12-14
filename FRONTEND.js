@@ -2,7 +2,7 @@
  * Lodash chain example
  */
 
- function getCommonTimeValues(sessions) {
+function getCommonTimeValues(sessions) {
     return _.chain(sessions)
         .map(s => {
             return {
@@ -44,4 +44,29 @@
             }
         })
         .value();
+}
+
+
+/**
+ * Added forkJoin
+ */
+reloadTable(): void {
+    this.showLoader = true;
+    this.aSub$ = forkJoin({
+        cloudModels: this.familyTasksCommunicatorSettingService.fetch(),
+        users: this.characteristicsUsersService.fetch()
+    })
+        .pipe(catchError(error => of(error)))
+        .subscribe(
+            ({ cloudModels, users }) => {
+                this.cloudModels = cloudModels;
+                this.users = users;
+                this.filteredUsers = this.users?.map(u => u.name);
+                this.isEmpty = this.cloudModels.length === 0 ? true : false;
+            },
+            error => console.log(error.error.message)
+        );
+
+    console.log('filteredUsers!', this.filteredUsers);
+    this.showLoader = false;
 }

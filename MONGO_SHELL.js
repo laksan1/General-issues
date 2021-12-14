@@ -230,11 +230,11 @@ mongoimport--db userstatistics--collection test--file C: \Users\a.a.laktionov\De
  * Insert sessions for the last 1 months
  */
 use('userstatistics');
-start = ISODate('2021-11-16T21:00:00.000Z')
-db.nikatimes.find().forEach(
+start = ISODate('2021-10-16T21:00:00.000Z')
+db.session.find().forEach(
     function (x) {
-        if (x.startTime > start && x.userAdName === 'Котельников Сергей') {
-            db.serg.insert(x)
+        if (x.startTime > start) {
+            db.test.insert(x)
         }
     }
 );
