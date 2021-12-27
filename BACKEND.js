@@ -229,3 +229,16 @@ db.inventory.aggregate( [ { $unwind : "$sizes" } ] )
 { "_id" : 1, "item" : "ABC1", "sizes" : "M" }
 { "_id" : 1, "item" : "ABC1", "sizes" : "L" }
 
+/*
+* Added formula
+*/
+aggregate.project({ salary_k: { $divide: [ "$salary", 1000 ] } });
+
+/*
+* Filter by not eq null and exist
+*/
+match({"field": {
+    "$exists": true,
+    "$ne": null
+}})
+

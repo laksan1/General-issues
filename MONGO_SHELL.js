@@ -290,7 +290,6 @@ use('userstatistics');
 db.nikatimes.updateMany({ $or: [{ idlingTime: null }, { idlingTime: { $exists: false } }] }, { $set: { idlingTime: 0 } })
 
 
-
 /**
 *  Added  field 'projectName' of collection by condition
 */
