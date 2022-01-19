@@ -242,3 +242,47 @@ match({"field": {
     "$ne": null
 }})
 
+.match({
+    'projectSessions.projectId': {
+        '$exists': true,
+        '$nin': [null,...initialSettings.EXCEPTION_PROJECT_NAMES_LIST]
+    }
+})
+
+/*
+ * Lookup CharacteristicsUsers and Sessions
+ */
+const result = await CharacteristicsUsers.aggregate()
+.lookup({
+    from: 'sessions',
+    let: {name: '$name'},
+    pipeline: [
+        {
+            $match: {
+                $expr:
+                    {$eq: ['$userAdName', '$$name']}
+            }
+        },
+        {$sort: {'startTime': -1}},
+        {$limit: 1},
+    ],
+    as: 'lastRevitSession'
+})
+.lookup({
+    from: 'nikatimes',
+    let: {name: '$name'},
+    pipeline: [
+        {
+            $match: {
+                $expr:
+                    {$eq: ['$userAdName', '$$name']}
+            }
+        },
+        {$sort: {'startTime': -1}},
+        {$limit: 1},
+    ],
+    as: 'lastNikaTimesSession'
+})
+.addFields({lastRevitSession: {$first: "$lastRevitSession"}})
+.addFields({lastNikaTimesSession: {$first: "$lastNikaTimesSession"}})
+
