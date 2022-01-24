@@ -296,6 +296,12 @@ db.nikatimes.updateMany({ $or: [{ idlingTime: null }, { idlingTime: { $exists: f
 use('userstatistics');
 db.sessions.updateMany({ $or: [{ projectName: null }, { projectName: { $exists: false } }] }, { $set: { projectName: '' } })
 
+/**
+ * Remove departament by userAdName
+ */
+use('userstatistics');
+db.nikatimes.updateMany({ $or: [{ userAdName: 'Харченко Дарья' }, { userAdName: { $exists: true } }] }, { $set: { departament: 'Департамент информационного моделирования и автоматизации' } })
+
 
 /**
  * Insert  field 'projectId' of collection by condition
@@ -322,3 +328,10 @@ db.sessions.find().forEach(
 {
     _id: { city: '$city' }
 }
+
+/**
+ * 
+ *For Compass. Filter by startTime
+ */
+FILTER: { startTime: {$gte: new Date('2022-01-24')} };
+SORT: {startTime: -1};
