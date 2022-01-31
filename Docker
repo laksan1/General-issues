@@ -1,0 +1,9 @@
+FROM node:14
+WORKDIR /usr/src/nikaserver
+COPY package.json ./
+RUN npm install
+COPY . .
+EXPOSE 5000
+CMD [ "npm", "run", "dev", "--scripts-prepend-node-path=auto"]
+
+

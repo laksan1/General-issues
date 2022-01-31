@@ -333,5 +333,7 @@ db.sessions.find().forEach(
  * 
  *For Compass. Filter by startTime
  */
-FILTER: { startTime: {$gte: new Date('2022-01-24')} };
+FILTER: { startTime: {$gte: new Date('2022-01-21')}, endTime: {$lte: new Date('2022-01-24')}, userAdName: 'Котельников Сергей'}
+
+{ startTime: {$gte: new Date('2022-01-24')}, endTime: {$lte: new Date('2022-01-25')}, userAdName: 'Ваш Реймонд'}
 SORT: {startTime: -1};
