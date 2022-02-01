@@ -27,14 +27,23 @@ mongo-express:
     ME_CONFIG_MONGODB_ADMINPASSWORD: example
     ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
-- docker build
+- docker build // эта команда собирает образ Docker из Dockerfile и «контекста». 
+				Контекст сборки — это набор файлов, расположенных по определённому пути или URL. 
+				Используйте флаг -t, чтобы задать имя образа. 
+				Например, команда docker build -t my_container . соберёт образ, используя текущую директорию, на что указывает точка в конце
 
-- docker run 7dfe9c0e2172 (Id or name) (Id of image)
+- docker run 7dfe9c0e2172 // (Id or name) запускает контейнер, на основе указанного образа. Эту команду можно дополнять другими, например, docker run my_image -it bash запустит контейнер, а затем запустит в нём bash.
 
 - docker images
 
-- docker ps — показывает список запущенных контейнеров
+- docker ps — показывает список запущенных контейнеров // (--all (показывает все контенеры, по умолчанию - показывает все запущенные контейнеры))
 
-- docker pull mongo (example) - скачать определённый образ или набор образов (репозиторий)
+- docker pull mongo (example) // скачать определённый образ или набор образов (репозиторий)
 
-- 
+- docker rm // удаляет один и более контейнеров, например, docker rm my_container
+
+- docker rmi // удаляет один и более образов, например, docker rmi my_image
+
+- docker stop //  останавливает один и более контейнеров. 
+				Команда docker stop my_container остановит один контейнер, а docker stop $(docker ps -a -q) — все запущенные. 
+				Более грубый способ — использовать docker kill my_container
