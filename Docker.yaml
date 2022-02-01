@@ -7,6 +7,11 @@ COPY . .
 EXPOSE 5000
 CMD [ "npm", "run", "dev", "--scripts-prepend-node-path=auto"]
 
+# Команда "RUN" запускается только при установке, а "CMD" при запуске образа
+# Команда "EXPOSE" задает наружный порт 
+
+
+
 #Mongo
 # Use root/example as user/password credentials
 version: '3.1'
@@ -27,7 +32,7 @@ mongo-express:
     ME_CONFIG_MONGODB_ADMINPASSWORD: example
     ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
-- docker build // эта команда собирает образ Docker из Dockerfile и «контекста». 
+- docker build . -t my_container // эта команда собирает образ Docker из Dockerfile и «контекста». 
 				Контекст сборки — это набор файлов, расположенных по определённому пути или URL. 
 				Используйте флаг -t, чтобы задать имя образа. 
 				Например, команда docker build -t my_container . соберёт образ, используя текущую директорию, на что указывает точка в конце

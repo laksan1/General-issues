@@ -299,8 +299,10 @@ db.sessions.updateMany({ $or: [{ projectName: null }, { projectName: { $exists: 
 /**
  * Remove departament by userAdName
  */
-use('userstatistics');
-db.nikatimes.updateMany({ $or: [{ userAdName: 'Харченко Дарья' }, { userAdName: { $exists: true } }] }, { $set: { departament: 'Департамент информационного моделирования и автоматизации' } })
+use('userstatistics'); // Проверить локально
+db.nikatimes.updateMany({ $and: [{ userAdName: 'Харченко Дарья' }, { userAdName: { $exists: true } }] }, { $set: { departament: 'Департамент информационного моделирования и автоматизации' } })
+
+db.sessions.updateMany({ $and: [{ userAdName: 'Харченко Дарья' }, { userAdName: { $exists: true } }] }, { $set: { departament: 'Департамент информационного моделирования и автоматизации' } })
 
 
 /**
