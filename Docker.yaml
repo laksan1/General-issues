@@ -31,14 +31,15 @@ mongo-express:
     ME_CONFIG_MONGODB_ADMINPASSWORD: example
     ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
-- docker build . -t my_container // эта команда собирает образ Docker из Dockerfile и «контекста». 
+- docker build . -t my_image // эта команда собирает образ Docker из Dockerfile и «контекста». 
 				Контекст сборки — это набор файлов, расположенных по определённому пути или URL. 
 				Используйте флаг -t, чтобы задать имя образа. 
 				Например, команда docker build -t my_container . соберёт образ, используя текущую директорию, на что указывает точка в конце
 
-- docker run -d -p 5000:6000 7dfe9c0e2172 // (Id or name) запускает контейнер, на основе указанного образа.
+- docker run -d -p 5000:6000 --name my_container --rm  7dfe9c0e2172 // (Id or name) запускает контейнер, на основе указанного образа.
                                         5000 - Порт на лоакальной машине. 6000 - порт для мапинга на локальный (EXPOSE).
                                         Параметр -d (detach)
+                                        --rm - Удаляет контейнер после остановки
                                         Эту команду можно дополнять другими, например, docker run my_image -it bash запустит контейнер, 
                                         а затем запустит в нём bash.
 
@@ -59,3 +60,5 @@ mongo-express:
 				Более грубый способ — использовать docker kill my_container
 
 - docker container prune// удаляет все запущенные контейнеры
+
+-  docker tag nika-server laksan/nika-server // создать новый образ на основе имеющегося (nika-server). 
