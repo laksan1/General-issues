@@ -62,3 +62,8 @@ mongo-express:
 - docker container prune// удаляет все запущенные контейнеры
 
 -  docker tag nika-server laksan/nika-server // создать новый образ на основе имеющегося (nika-server). 
+
+- docker push laksan/nika-server:latest // Push образа на DokcerHub
+
+- docker pull laksan/nika-server  // Скачать образ с DockerHub
+
