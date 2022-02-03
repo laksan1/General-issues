@@ -1,37 +1,12 @@
 Playbook.yaml - описывавет последовательность действий, который должен произвести ansible сервер с клиентом
 
-version: "3"
-services:
-  nika-motion:
-    image: registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-motion:1.0.0
-    ports:
-      - 127.0.0.1:8080:80
-    volumes:
-      - ./nika-motion/nika-motion.conf:/etc/nginx/conf.d/nika-motion.conf:ro
-    networks:
-      - nika # Ключ между контейнерам
+# NIKA_SERVER
+-  docker build . -t registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest
+-  docker tag nika-server registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest #Переименовать имя образа
+-  docker push registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest
 
-  nika-server:
-    image: registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:2.0.12
-    ports:
-      - 127.0.0.1:5000:5000
-      - 127.0.0.1:9000:9000
-      - 127.0.0.1:9020:9020
-      - 127.0.0.1:9030:9030
-    volumes:
-      - ./nika-server/keys.js:/usr/src/nikaserver/config/keys.js:ro
-    networks:
-      - nika # Ключ между контейнерам
-
-  mongodb:
-    image: mongo
-    volumes:
-      - /opt/nika/mongodb/db:/data/db
-      - /opt/nika/mongodb/dumps:/tmp/dumps
-    networks:
-      - nika # Ключ между контейнерам
-
-networks:
-  nika:# Ключ между контейнерами 
+# NIKA_MOTION
+-  docker build . -t registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-motion:latest
+-  docker push registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-motion:latest
 
 
