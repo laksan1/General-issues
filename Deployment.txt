@@ -1,12 +1,14 @@
 Playbook.yaml - описывавет последовательность действий, который должен произвести ansible сервер с клиентом
 
-# NIKA_SERVER
+# PUSH с локальной машины
+# 1.NIKA_SERVER
 -  docker build . -t registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest
 -  docker tag nika-server registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest #Переименовать имя образа
 -  docker push registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest
 
-# NIKA_MOTION
+# 2.NIKA_MOTION
 -  docker build . -t registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-motion:latest
 -  docker push registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-motion:latest
 
 
+# PULL на VM
