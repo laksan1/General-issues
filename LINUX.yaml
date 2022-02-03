@@ -1,0 +1,31 @@
+- sudo apt update
+
+- sudo apt install git docker-compose docker.io ansible // install docker
+
+- ls // просмотреть содержимое других каталогов
+
+- ls -a // покажет скрытые файлы
+
+- cat // вывод содержимого файла в командной строке
+
+- cp // копирование файлов из текущего каталога в другой каталог
+
+- mv // перемещение файлов
+
+- mkdir // Создать новый каталог
+
+
+
+# Подготовка виртуальной машины 
+1.  sudo apt update
+2.  sudo apt install git docker-compose docker.io ansible // install docker
+3.  sudo apt install build-essential dkms linux-headers-$(uname -r) #Установка VirtualBox Guest Additions in Ubuntu
+4.  Next, from the Virtual Machine menu bar, go to Devices => click on Insert Guest Additions CD image as shown in the screenshot. This helps to mount the Guest Additions ISO file inside your virtual machine.
+5. Now to enable Shared Clipboard and Drag’n’Drop functionality between Guest and Host Machine. Go to General => 
+Advanced and enable the two options (Shared Clipboard and Drag’n’Drop) as you wish, from the drop down options. 
+Then click OK to save the settings and boot your system, login and test if everything is working fine.
+6. ssh-keygen -t rsa
+7. Enter file in which to save the key (/home/user/.ssh/id_rsa)
+8. Enter. Enter.
+9. cat ~/.ssh/id_rsa.pub #Вывести на консоли содержимое
+10. 
