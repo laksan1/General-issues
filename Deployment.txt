@@ -4,7 +4,8 @@ Playbook.yaml - описывавет последовательность дей
 # 1.NIKA_SERVER
 -  docker build . -t registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest
 -  docker tag nika-server registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest #Переименовать имя образа
--  docker push registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest
+-  docker push registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest # 1.0.0
+
 
 # 2.NIKA_MOTION
 -  docker build . -t registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-motion:latest
@@ -12,3 +13,18 @@ Playbook.yaml - описывавет последовательность дей
 
 
 # PULL на VM
+
+- cd /opt/nika/deployment
+
+-  docker pull registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-motion:latest
+-  docker pull registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest
+
+- docker-compose up -d 
+- Поменять версию latest на ...
+
+#- /opt/nika/deployment  # папка compose
+
+
+1. winscp transfer backup to VM
+2. goto ssh on VM (putty)
+3. mongoimport --collection sessions_1 --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/demo_sessions.json --uri mongodb://localhost:27017/userstatistics
