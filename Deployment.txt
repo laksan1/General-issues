@@ -25,6 +25,8 @@ Playbook.yaml - описывавет последовательность дей
 #- /opt/nika/deployment  # папка compose
 
 # Initial actions for VM
+-Добавить запись А и сертификат в DNS
+
 1. apt update && apt upgrade
 2. git clone git@gitlab.com:in-delo/nikamissioncontrol/DeploymentThings.git
 3. dig nika.we-on.com
