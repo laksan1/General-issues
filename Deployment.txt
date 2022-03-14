@@ -24,9 +24,20 @@ Playbook.yaml - описывавет последовательность дей
 
 #- /opt/nika/deployment  # папка compose
 
+# Initial actions for VM
+1. apt update && apt upgrade
+2. git clone git@gitlab.com:in-delo/nikamissioncontrol/DeploymentThings.git
+3. dig nika.we-on.com
+4. dig nika.we-on.com @8.8.8.8 // Проверка на запись "A" в DNS
+5. systemctl status nginx // Проверить статус nginx
+6. docker ps
+7. docker login registry.gitlab.com // Логин и пароль от гитлаба
+8. docker-compose up -d // Запуск докера
 
+# Import collection of mongo
 1. winscp transfer backup to VM
 2. goto ssh on VM (putty)
 3. mongoimport --collection sessions_1 --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/demo_sessions.json --uri mongodb://localhost:27017/userstatistics
 4. mongoimport --collection sessions --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/sessions_new.json --uri mongodb://localhost:27017/userstatistics //DROP
 4. mongoimport --collection characteristicsusers --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/characteristicsusers_new.json --uri mongodb://localhost:27017/userstatistics //DROP
+5. mongoimport --collection nikatimes --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/nikatimes.json --uri mongodb://localhost:27017/userstatistics //DROP

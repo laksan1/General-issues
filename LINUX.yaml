@@ -13,6 +13,8 @@
 - mv // перемещение файлов
 
 - mkdir // Создать новый каталог
+- passwd root // Поменять пароль
+
 
 
 
@@ -27,5 +29,8 @@ Then click OK to save the settings and boot your system, login and test if every
 6. ssh-keygen -t rsa
 7. Enter file in which to save the key (/home/user/.ssh/id_rsa)
 8. Enter. Enter.
-9. cat ~/.ssh/id_rsa.pub #Вывести на консоли содержимое
-10. 
+9. ssh-keygen
+10. cat ~/.ssh/id_rsa.pub #Вывести на консоли содержимое
+11. ssh root@195.24.64.158
+12. history #Вывод последних команд
+
