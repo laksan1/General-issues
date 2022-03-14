@@ -34,4 +34,5 @@ Then click OK to save the settings and boot your system, login and test if every
 11. ssh root@195.24.64.158
 12. history #Вывод последних команд
 13. ctrl + z # Выйти из команды Linux
+14. ctrl + X # Nano Сохранить из выйти из файла
 
