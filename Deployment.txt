@@ -43,3 +43,11 @@ Playbook.yaml - описывавет последовательность дей
 4. mongoimport --collection sessions --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/sessions_new.json --uri mongodb://localhost:27017/userstatistics //DROP
 4. mongoimport --collection characteristicsusers --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/characteristicsusers_new.json --uri mongodb://localhost:27017/userstatistics //DROP
 5. mongoimport --collection nikatimes --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/nikatimes.json --uri mongodb://localhost:27017/userstatistics //DROP
+
+# Изменения домена или виртуальной машины
+1. Добавить запись "A" для DNS #https://www.nic.ru/help/kak-napravit6-domen-na-vds_7734.html
+2. Изменения в ansible
+	- inventory.yaml "hosts"
+	- nika-motion.conf "server_name"
+	- nika-gateway.conf "ssl_certificate"
+	- nika-gateway.conf "ssl_certificate_key"
