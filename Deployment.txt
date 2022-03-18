@@ -19,7 +19,7 @@ Playbook.yaml - описывавет последовательность дей
 -  docker pull registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-motion:latest
 -  docker pull registry.gitlab.com/in-delo/nikamissioncontrol/deploymentthings/nika-server:latest
 
-- docker-compose up -d 
+- docker-compose up -d
 - Поменять версию latest на ...
 
 #- /opt/nika/deployment  # папка compose
@@ -27,14 +27,26 @@ Playbook.yaml - описывавет последовательность дей
 # Initial actions for VM
 -Добавить запись А и сертификат в DNS
 
+Pre-actions: Local
+1. ssh-copy-id root@<remote-vm-ip>  # Make non-password access through your ssh-key
+2. ssh root@<remote-vm-ip>  # Check non-password access
+
+Remote host:
 1. apt update && apt upgrade
-2. git clone git@gitlab.com:in-delo/nikamissioncontrol/DeploymentThings.git
+2. systemctl status nginx // Проверить статус nginx
+3. docker ps
+4. docker login registry.gitlab.com // Логин и пароль от гитлаба
+5. docker-compose up -d // Запуск докера
+
+Local command VM:
+1. git clone git@gitlab.com:in-delo/nikamissioncontrol/DeploymentThings.git // git pull
+2. ansible-playbook -i inventory.yaml playbook.yaml -b
 3. dig nika.we-on.com
 4. dig nika.we-on.com @8.8.8.8 // Проверка на запись "A" в DNS
-5. systemctl status nginx // Проверить статус nginx
-6. docker ps
-7. docker login registry.gitlab.com // Логин и пароль от гитлаба
-8. docker-compose up -d // Запуск докера
+
+
+1. Copy crt and key files
+
 
 # Import collection of mongo
 1. winscp transfer backup to VM
@@ -51,3 +63,7 @@ Playbook.yaml - описывавет последовательность дей
 	- nika-motion.conf "server_name"
 	- nika-gateway.conf "ssl_certificate"
 	- nika-gateway.conf "ssl_certificate_key"
+3. docker-compose restart
+
+
+systemctl status nginx.service
