@@ -67,3 +67,10 @@ Local command VM:
 
 
 systemctl status nginx.service
+
+
+# PFX MEGA GUARD (Чтобы задать пароль при export ключа. Бесполезное действие)
+1. openssl pkcs12 -export -out we-on.pfx -inkey we-on.key -in we-on.crt
+2. openssl pkcs12 -in we-on.pfx -nocerts -nodes -out we-on.rsa
+3. ssl_certificate_key /etc/ssl/nika/nika.we-on.rsa; (nika-gateway.conf)
+
