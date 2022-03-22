@@ -53,10 +53,10 @@ Local command VM:
 # Import collection of mongo
 1. winscp transfer backup to VM
 2. goto ssh on VM (putty)
-3. mongoimport --collection sessions_1 --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/sessions.json --uri mongodb://localhost:27017/userstatistics
-4. mongoimport --collection sessions --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/sessions_new.json --uri mongodb://localhost:27017/userstatistics //DROP
-4. mongoimport --collection characteristicsusers --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/characteristicsusers.json --uri mongodb://localhost:27017/userstatistics //DROP
-5. mongoimport --collection nikatimes --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/nikatimes.json --uri mongodb://localhost:27017/userstatistics //DROP
+3. перейти /opt/nika/mongodb/db
+4. mongoimport --collection sessions --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/sessions.json --uri mongodb://localhost:27017/userstatistics
+5. mongoimport --collection characteristicsusers --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/characteristicsusers.json --uri mongodb://localhost:27017/userstatistics
+6. mongoimport --collection nikatimes --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/nikatimes.json --uri mongodb://localhost:27017/userstatistics
 
 # Изменения домена или виртуальной машины
 1. Добавить запись "A" для DNS #https://www.nic.ru/help/kak-napravit6-domen-na-vds_7734.html
