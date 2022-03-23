@@ -58,6 +58,8 @@ Local command VM:
 5. mongoimport --collection characteristicsusers --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/characteristicsusers.json --uri mongodb://localhost:27017/userstatistics
 6. mongoimport --collection nikatimes --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/nikatimes.json --uri mongodb://localhost:27017/userstatistics
 
+	(подключиться к монге. Заходим в папку opt/nika/mongodb/db и пишем команду mongo)
+
 # Изменения домена или виртуальной машины
 1. Добавить запись "A" для DNS #https://www.nic.ru/help/kak-napravit6-domen-na-vds_7734.html
 2. Изменения в ansible
