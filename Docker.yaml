@@ -66,4 +66,5 @@ mongo-express:
 - docker push laksan/nika-server:latest // Push образа на DokcerHub
 
 - docker pull laksan/nika-server  // Скачать образ с DockerHub
+- docker images -q | xargs docker rmi // Удалить несипользуемы образы
 

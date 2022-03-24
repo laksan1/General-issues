@@ -57,6 +57,7 @@ Local command VM:
 4. mongoimport --collection sessions --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/sessions.json --uri mongodb://localhost:27017/userstatistics
 5. mongoimport --collection characteristicsusers --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/characteristicsusers.json --uri mongodb://localhost:27017/userstatistics
 6. mongoimport --collection nikatimes --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/nikatimes.json --uri mongodb://localhost:27017/userstatistics
+7. mongoimport --collection users --drop --jsonArray --type json --file /opt/nika/mongodb/dumps/userstatistics/users.json --uri mongodb://localhost:27017/userstatistics
 
 	(подключиться к монге. Заходим в папку opt/nika/mongodb/db и пишем команду mongo)
 
