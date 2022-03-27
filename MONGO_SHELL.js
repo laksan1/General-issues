@@ -275,6 +275,9 @@ db.sessions.updateMany({ isAnotherDepartment: true }, { $set: { isAnotherDepartm
 use('userstatistics');
 db.characteristicsusers.updateMany({ $or: [{ city: null }, { city: { $exists: false } }, { city: '' }] }, { $set: { city: "Москва" } })
 
+use('userstatistics');
+db.characteristicsusers.updateMany({ $or: [{ streetAddress: null }, { streetAddress: { $exists: false } }, { streetAddress: '' }] }, { $set: { streetAddress: "БЦ «Z-Plaza», ул. Бутырская, д. 62, этаж 4" } })
+
 
 /**
  * Added  field 'revitVersion' of collection by condition
@@ -303,6 +306,10 @@ use('userstatistics'); // Проверить локально
 db.nikatimes.updateMany({ $and: [{ userAdName: 'Харченко Дарья' }, { userAdName: { $exists: true } }] }, { $set: { departament: 'Департамент информационного моделирования и автоматизации' } })
 
 db.sessions.updateMany({ $and: [{ userAdName: 'Харченко Дарья' }, { userAdName: { $exists: true } }] }, { $set: { departament: 'Департамент информационного моделирования и автоматизации' } })
+
+
+use('userstatistics');
+db.sessions.updateMany({ $and: [{ userAdName: 'new_user_52' }, { userAdName: { $exists: true } }] }, { $set: { userAdName: 'Николай_П' } })
 
 /**
  * Insert  field 'projectId' of collection by condition
