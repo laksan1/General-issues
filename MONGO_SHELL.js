@@ -239,6 +239,19 @@ db.sessions.find().forEach(
     }
 );
 
+/**
+ * Insert sessions for the last 1 months
+ */
+use('userstatistics');
+start = ISODate('2022-03-16T21:00:00.000Z')
+db.nikatimes.find().forEach(
+    function (x) {
+        if (x.startTime > start) {
+            db.nikatimes_test.insert(x)
+        }
+    }
+);
+
 
 /**
  * Insert sessions for the last 1 months
@@ -329,6 +342,12 @@ db.sessions.find().forEach(
     }
 );
 
+
+
+
+use('userstatistics');
+db.users.remove({ "email": "laksan@mail.ru" });
+
 /**
  * 
  * Group by field to compass
@@ -341,7 +360,7 @@ db.sessions.find().forEach(
  * 
  *For Compass. Filter by startTime
  */
-FILTER: { startTime: {$gte: new Date('2022-01-21')}, endTime: {$lte: new Date('2022-01-24')}, userAdName: 'Котельников Сергей'}
+FILTER: { startTime: { $gte: new Date('2022-01-21') }, endTime: { $lte: new Date('2022-01-24') }, userAdName: 'Котельников Сергей' }
 
-{ startTime: {$gte: new Date('2022-01-24')}, endTime: {$lte: new Date('2022-01-25')}, userAdName: 'Ваш Реймонд'}
-SORT: {startTime: -1};
+{ startTime: { $gte: new Date('2022-01-24') }, endTime: { $lte: new Date('2022-01-25') }, userAdName: 'Ваш Реймонд' }
+SORT: { startTime: -1 };
