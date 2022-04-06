@@ -38,8 +38,9 @@ db.informationusers.find().forEach((user) => {
  * Removing from collection documents by value of field
  **/
 use('missioncontrol');
-db.addins.remove({ pluginName: 'IEK - ' }
-);
+db.addins.remove({ pluginName: 'IEK - ' });
+
+db.nikatimes.remove({ departament: '' });
 
 /**
  * Remove values ​​a less than b
@@ -243,7 +244,7 @@ db.sessions.find().forEach(
  * Insert sessions for the last 1 months
  */
 use('userstatistics');
-start = ISODate('2022-03-16T21:00:00.000Z')
+start = ISODate('2022-03-20T21:00:00.000Z')
 db.nikatimes.find().forEach(
     function (x) {
         if (x.startTime > start) {
@@ -274,7 +275,7 @@ use('userstatistics');
 db.sessions.updateMany({ revitVersion: '' }, { $set: { revitVersion: '2020' } })
 
 use('userstatistics');
-db.sessions.updateMany({ departament: 'Отдел систем  отопления и вентиляции' }, { $set: { departament: 'Отдел систем отопления и вентиляции' } })
+db.nikatimes.updateMany({ departament: 'Отдел систем  отопления и вентиляции' }, { $set: { departament: 'Отдел систем отопления и вентиляции' } })
 
 
 use('userstatistics');
