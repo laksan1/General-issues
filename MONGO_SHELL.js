@@ -365,3 +365,24 @@ FILTER: { startTime: { $gte: new Date('2022-01-21') }, endTime: { $lte: new Date
 
 { startTime: { $gte: new Date('2022-01-24') }, endTime: { $lte: new Date('2022-01-25') }, userAdName: 'Ваш Реймонд' }
 SORT: { startTime: -1 };
+
+/**
+ * 
+ *Create document with the first request ( upsert: true)
+ */
+const roleManagerSetting = await RoleManagerSetting.findOneAndUpdate(
+    {},
+    {
+        $set: {
+            roles: [
+                {
+                    name: 'user',
+                    value: true
+                }]
+        }
+    },
+    {
+        new: true,
+        upsert: true
+    }
+);
