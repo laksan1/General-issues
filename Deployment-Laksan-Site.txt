@@ -5,3 +5,9 @@
 # 2.Laksan-Client
 - docker build . -t registry.gitlab.com/laksan-site/deploymentansible/laksan-client:latest
 - docker push  registry.gitlab.com/laksan-site/deploymentansible/laksan-client:latest
+
+- cat /tmp/pw - пароль от удаленной VM
+
+- ошибка Docker login добавить токен на виртуальную машину через https://gitlab.com/groups/laksan-site/-/settings/repository/
+- ввести вместо userName = Токен
+- Добавить DNS запись
