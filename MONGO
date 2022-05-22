@@ -2,3 +2,7 @@
 
 # MONGORESTORE 
 1. В папке dump через powerShell ввести команду "./mongorestore -d NIKA C:\Users\d.r.tukaev\Desktop\dump"
+
+2.Error: connect ECONNREFUSED 127.0.0.1:27017
+$ net stop MongoDB
+$ net start MongoDB

@@ -1,6 +1,7 @@
 # 1.Laksan-Server
 
-
+- docker build . -t registry.gitlab.com/laksan-site/deploymentansible/laksan-server:latest
+- docker push  registry.gitlab.com/laksan-site/deploymentansible/laksan-server:latest
 
 # 2.Laksan-Client
 - docker build . -t registry.gitlab.com/laksan-site/deploymentansible/laksan-client:latest

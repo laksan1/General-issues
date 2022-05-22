@@ -174,7 +174,6 @@ db.sessions.remove([
     { differenceTime: { $gte: 500 } },
     true
 ]);
-
 /**
  * Copy collection
  **/
@@ -244,7 +243,7 @@ db.sessions.find().forEach(
  * Insert sessions for the last 1 months
  */
 use('userstatistics');
-start = ISODate('2022-03-20T21:00:00.000Z')
+start = ISODate('2022-05-10T21:00:00.000Z')
 db.nikatimes.find().forEach(
     function (x) {
         if (x.startTime > start) {
@@ -275,7 +274,7 @@ use('userstatistics');
 db.sessions.updateMany({ revitVersion: '' }, { $set: { revitVersion: '2020' } })
 
 use('userstatistics');
-db.nikatimes.updateMany({ departament: 'Отдел систем  отопления и вентиляции' }, { $set: { departament: 'Отдел систем отопления и вентиляции' } })
+db.nikatimes.updateMany({ departament: 'Отдел электроснабжения' }, { $set: { departament: 'Отдел систем электроснабжения' } })
 
 
 use('userstatistics');
@@ -323,7 +322,7 @@ db.sessions.updateMany({ $and: [{ userAdName: 'Харченко Дарья' }, {
 
 
 use('userstatistics');
-db.sessions.updateMany({ $and: [{ userAdName: 'new_user_52' }, { userAdName: { $exists: true } }] }, { $set: { userAdName: 'Николай_П' } })
+db.characteristicsusers.updateMany({ $and: [{ userAdName: 'Малахов Максим' }, { userAdName: { $exists: true } }] }, { $set: { departament: '' } })
 
 /**
  * Insert  field 'projectId' of collection by condition
@@ -386,3 +385,14 @@ const roleManagerSetting = await RoleManagerSetting.findOneAndUpdate(
         upsert: true
     }
 );
+
+// Проверить
+use('userstatistics');
+db.sessions.remove([
+    {
+        $unwind: '$projectSessions',
+
+    },
+    { '$projectSessions.startTime': { $gte: new Date('2022-01-21') }, '$projectSessions.endTime': { $lte: new Date('2022-01-24') }},
+    true
+]);
