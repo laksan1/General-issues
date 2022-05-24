@@ -12,3 +12,16 @@
 - ошибка Docker login добавить токен на виртуальную машину через https://gitlab.com/groups/laksan-site/-/settings/repository/
 - ввести вместо userName = Токен
 - Добавить DNS запись
+
+
+- cd /opt/nika/deployment
+
+-  docker pull registry.gitlab.com/laksan-site/deploymentansible/laksan-client:latest
+-  docker pull registry.gitlab.com/laksan-site/deploymentansible/laksan-server:latest
+-(проверить tag (:latest) у контейнера)
+
+# Если ошибка после docker push - denied: access forbidden.
+- docker logout registry.gitlab.com/laksan-site/deploymentansible/laksan-server
+- Зайти и сделать Deploy tokens для проекта. Скопировать токен.
+- Сделать docker login registry.gitlab.com/laksan-site/deploymentansible/laksan-server
+- Ввести вместо пароля скопированный токен.
