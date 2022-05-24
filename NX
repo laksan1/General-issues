@@ -1,0 +1,11 @@
+create nx-workspace --package-manager=npm
+cd nika-shop
+nx add @nguniversal/express-engine
+npm add -W @nguniversal/express-engine
+nx g @nrwl/angular:ngrx rs --module=apps/store/src/app/app.module.ts (true false)
+npm add hammerjs angular-imask 
+nx add @angular/material (Custom true true)
+npm add -D ng-mocks ts-mockito
+npm add -D eslint-plugin-import eslint-plugin-jsdoc eslint-plugin-ngrx eslint-plugin-prettier eslint-plugin-simple-import-sort
+change .eslintrc.json 
+npm add -D html-minifier @types/html-minifier dotenv-webpack @types/dotenv-webpack @types/dotenv @types/compression compression @angular-builders/custom-webpack
