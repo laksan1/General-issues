@@ -1,0 +1,51 @@
+import { Injectable } from '@nestjs/common';
+import { MessageBody, OnGatewayConnection, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
+import { Server } from 'http';
+import { PluginService } from '../plugin.service';
+
+
+interface PluginDto {
+	status: boolean;
+	buffer: Buffer;
+}
+
+enum EVENT_NAMES {
+	PLUGIN_RESPONSE = 'pluginResponse',
+	CONNECTION = 'connection',
+	PLUGIN_RECEIVED = 'pluginReceived',
+	PLUGIN_SEND = 'pluginSend'
+}
+
+@WebSocketGateway(9060, {cors: true,}) // { transports: ['websocket'] }
+@Injectable()
+export class PluginGateway implements  OnGatewayConnection{
+	constructor(private  readonly pluginService: PluginService) {
+	}
+
+	@WebSocketServer()
+	server: Server;
+
+	handleConnection(client: any, ...args: any[]): any {
+		client.emit(EVENT_NAMES.CONNECTION, 'PluginGateway is successfully connected to server');
+	}
+
+	@SubscribeMessage(EVENT_NAMES.PLUGIN_SEND)
+	async handleReceivePlugin(@MessageBody() pluginName: string) {
+		const file = await this.pluginService.findByName(pluginName);
+
+		const pluginDto: PluginDto = {
+				status: true,
+				buffer: Buffer.from(file as unknown as Buffer)
+		};
+
+		console.log('PLUGIN_SEND pluginDto', pluginDto);
+		this.server.emit(EVENT_NAMES.PLUGIN_RESPONSE, pluginDto);
+	}
+
+
+	@SubscribeMessage(EVENT_NAMES.PLUGIN_RECEIVED)
+	handleMessage(@MessageBody() message: string): void {
+		console.log('PLUGIN_RECEIVED', message);
+	}
+
+}
