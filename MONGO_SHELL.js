@@ -243,7 +243,7 @@ db.sessions.find().forEach(
  * Insert sessions for the last 1 months
  */
 use('userstatistics');
-start = ISODate('2022-05-10T21:00:00.000Z')
+start = ISODate('2022-07-12T22:00:00.000Z')
 db.nikatimes.find().forEach(
     function (x) {
         if (x.startTime > start) {
@@ -343,6 +343,31 @@ db.sessions.find().forEach(
 );
 
 
+/**
+ * Switch aggrigation
+ */
+
+addFields({
+    timeType: {
+        $switch: {
+            branches: [
+                {
+                    case:{$in: [ '$projectSessions.programName',  ProgramNamesFilter.idlingList]},
+                    then: initialSettings.NIKA_TIMES_CHART_PROCESS_LABELS.IDLING_LABEL
+                },
+                {
+                    case:{$in: ['$projectSessions.programName',  ProgramNamesFilter.communicationList]},
+                    then: initialSettings.NIKA_TIMES_CHART_PROCESS_LABELS.COMMUNICATION_LABEL
+                },
+                {
+                    case:{$in: ['$projectSessions.programName',  ProgramNamesFilter.workingList]},
+                    then: initialSettings.NIKA_TIMES_CHART_PROCESS_LABELS.WORKING_LABEL
+                },
+            ],
+            default: initialSettings.NIKA_TIMES_CHART_PROCESS_LABELS.OTHER_LABEL
+        }
+    }
+});
 
 
 use('userstatistics');
